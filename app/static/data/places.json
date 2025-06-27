@@ -1,16 +1,156 @@
 [
   {
-    "name": "Hometown",
-    "country": "MX",
-    "coords": [19.4326, -99.1332],
-    "desc": "I'm currently here.",
-    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsdz_JVKJmR6ybLhiIG3ZN1zLJl-kQAf9O1w&s"
+    "name": "Andorra 2015",
+    "country": "AD",
+    "coords": [42.5075, 1.5218],
+    "desc": "Visited the Pyrenees microstate during a European road trip.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Andorra_la_Vella.jpg/1200px-Andorra_la_Vella.jpg"
   },
   {
-    "name": "Summer 2022",
+    "name": "Iguazu 2017",
+    "country": "AR",
+    "coords": [-25.6953, -54.4367],
+    "desc": "Explored Iguazu Falls on the Argentina-Brazil border.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Cataratas_Iguaz%C3%BA.JPG/1280px-Cataratas_Iguaz%C3%BA.JPG"
+  },
+  {
+    "name": "Buenos Aires 2017",
+    "country": "AR",
+    "coords": [-34.6037, -58.3816],
+    "desc": "Discovered the vibrant capital of Argentina.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Obelisco-Buenos-Aires.jpg/1200px-Obelisco-Buenos-Aires.jpg"
+  },
+  {
+    "name": "Belice 2012",
+    "country": "BZ",
+    "coords": [15.8833, -88.6333],
+    "desc": "Traveled near the border with Tapachula, Mexico.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Belize_Border_sign.jpg/1280px-Belize_Border_sign.jpg"
+  },
+  {
+    "name": "Rio de Janeiro 2017",
+    "country": "BR",
+    "coords": [-22.9068, -43.1729],
+    "desc": "Visited Christ the Redeemer and iconic beaches.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Rio_de_Janeiro_Montage.png/800px-Rio_de_Janeiro_Montage.png"
+  },
+  {
+    "name": "Ontario & Quebec 2017",
+    "country": "CA",
+    "coords": [45.4215, -75.6972],
+    "desc": "Explored Ottawa, Montreal, and Toronto.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Toronto_skyline_at_night.jpg/1200px-Toronto_skyline_at_night.jpg"
+  },
+  {
+    "name": "Calgary & Banff 2024",
+    "country": "CA",
+    "coords": [51.1784, -115.5708],
+    "desc": "Hiked through the Canadian Rockies and Banff National Park.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Lake_Louise_Alberta_Canada.jpg/1200px-Lake_Louise_Alberta_Canada.jpg"
+  },
+  {
+    "name": "Barcelona 2008",
+    "country": "ES",
+    "coords": [41.3851, 2.1734],
+    "desc": "Visited Sagrada Familia and strolled through Las Ramblas.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Barcelona_montage.jpg/1200px-Barcelona_montage.jpg"
+  },
+  {
+    "name": "Madrid, Salamanca, Sevilla 2025",
+    "country": "ES",
+    "coords": [40.4168, -3.7038],
+    "desc": "Explored central and southern Spain’s historic cities.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Sevilla_Panorama.jpg/1200px-Sevilla_Panorama.jpg"
+  },
+  {
+    "name": "Orlando & Anaheim 2012",
+    "country": "US",
+    "coords": [28.5383, -81.3792],
+    "desc": "Visited major theme parks on both US coasts.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Walt_Disney_World_logo.svg/1200px-Walt_Disney_World_logo.svg.png"
+  },
+  {
+    "name": "Kansas City 2021 & 2024",
+    "country": "US",
+    "coords": [39.0997, -94.5786],
+    "desc": "Spent time in the heart of the Midwest.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Downtown_Kansas_City_Missouri.jpg/1200px-Downtown_Kansas_City_Missouri.jpg"
+  },
+  {
+    "name": "Los Angeles 2025",
+    "country": "US",
+    "coords": [34.0522, -118.2437],
+    "desc": "Explored the City of Angels and its surroundings.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Los_Angeles_skyline_at_night.jpg/1200px-Los_Angeles_skyline_at_night.jpg"
+  },
+  {
+    "name": "Toulouse 2022",
+    "country": "FR",
+    "coords": [43.6047, 1.4442],
+    "desc": "Discovered the pink city in southern France.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Capitole_de_Toulouse.jpg/1200px-Capitole_de_Toulouse.jpg"
+  },
+  {
+    "name": "Paris 2025",
     "country": "FR",
     "coords": [48.8566, 2.3522],
-    "desc": "Did some roadtripping in the countryside.",
-    "image": "https://www.francethisway.com/images/places/chatellerault.jpg"
+    "desc": "Revisited France’s iconic capital.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Tour_Eiffel_Wikimedia_Commons.jpg/1200px-Tour_Eiffel_Wikimedia_Commons.jpg"
+  },
+  {
+    "name": "Marseille 2018",
+    "country": "FR",
+    "coords": [43.2965, 5.3698],
+    "desc": "Experienced the Mediterranean port city.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Marseille_Vieux-Port.jpg/1200px-Marseille_Vieux-Port.jpg"
+  },
+  {
+    "name": "Rome, Pompeii, Florence 2015",
+    "country": "IT",
+    "coords": [41.9028, 12.4964],
+    "desc": "Explored Italy’s historical and cultural landmarks.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Colosseum_in_Rome%2C_Italy_-_April_2007.jpg/1200px-Colosseum_in_Rome%2C_Italy_-_April_2007.jpg"
+  },
+  {
+    "name": "Vatican 2015",
+    "country": "VA",
+    "coords": [41.9029, 12.4534],
+    "desc": "Visited St. Peter’s Basilica and the Vatican Museums.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Saint_Peter%27s_Basilica_facade.jpg/1200px-Saint_Peter%27s_Basilica_facade.jpg"
+  },
+  {
+    "name": "Kyoto, Osaka, Tokyo, Hiroshima 2025",
+    "country": "JP",
+    "coords": [35.0116, 135.7681],
+    "desc": "Traveled across Japan’s cultural and modern hubs.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Kiyomizu-dera_in_Kyoto.jpg/1200px-Kiyomizu-dera_in_Kyoto.jpg"
+  },
+  {
+    "name": "Monaco 2008",
+    "country": "MC",
+    "coords": [43.7384, 7.4246],
+    "desc": "Visited the luxurious principality on the French Riviera.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Monaco_Monte_Carlo_view.jpg/1200px-Monaco_Monte_Carlo_view.jpg"
+  },
+  {
+    "name": "Lisbon & Faro 2025",
+    "country": "PT",
+    "coords": [38.7223, -9.1393],
+    "desc": "Explored Portugal’s capital and southern coast.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Lisbon_Montage.jpg/1200px-Lisbon_Montage.jpg"
+  },
+  {
+    "name": "Stockholm & Kiruna 2025",
+    "country": "SE",
+    "coords": [59.3293, 18.0686],
+    "desc": "Experienced Sweden’s capital and the Arctic Circle.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Stockholm_City_Hall.jpg/1200px-Stockholm_City_Hall.jpg"
+  },
+  {
+    "name": "Montevideo 2018",
+    "country": "UY",
+    "coords": [-34.9011, -56.1645],
+    "desc": "Visited Uruguay’s coastal capital.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Montevideo_Centro.jpg/1200px-Montevideo_Centro.jpg"
   }
 ]

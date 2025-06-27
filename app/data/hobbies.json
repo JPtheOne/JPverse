@@ -1,19 +1,36 @@
 {
-    "hobbies": [
-        {
-            "name": "Photography",
-            "description": "Capturing moments and landscapes through my lens",
-            "image": "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=500"
-        },
-        {
-            "name": "Gaming",
-            "description": "Exploring virtual worlds and strategic challenges",
-            "image": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500"
-        },
-        {
-            "name": "Reading",
-            "description": "Diving into sci-fi and technical books",
-            "image": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=500"
-        }
-    ]
-} 
+  "hobbies": [
+    {
+      "name": "Traveling",
+      "description": "Exploring new countries and cultures around the world.",
+      "image": "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500"
+    },
+    {
+      "name": "Hiking",
+      "description": "Trekking through mountains, forests, and scenic trails.",
+      "image": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=500"
+    },
+   
+    {
+      "name": "Gym & Running",
+      "description": "Working out regularly to stay strong and healthy.",
+      "image": "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=500"
+    },
+    {
+      "name": "Music",
+      "description": "Playing guitar, bass, drums, piano, and ukulele; creating music at home.",
+      "image": "https://images.unsplash.com/photo-1508780709619-79562169bc64?w=500"
+    },
+    {
+      "name": "Cybersecurity Challenges",
+      "description": "Participating in CTFs and solving cybersecurity puzzles.",
+      "image": "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?w=500"
+    },
+    {
+      "name": "Programming",
+      "description": "Building web apps, automation scripts, and experimenting with new technologies.",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=500"
+    }
+    
+  ]
+}

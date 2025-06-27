@@ -1,26 +1,47 @@
 [
   {
-    "title": "SWE Intern",
-    "company": "My First Company",
-    "startDate": "2021-06-01",
-    "endDate": "2021-08-31",
+    "title": "Full-Time SOC Analyst",
+    "company": "TBSEK",
+    "startDate": "2024-04-01",
+    "endDate": "Present",
     "location": "Remote",
     "responsabilities": [
-      "Developed a comprehensive understanding of software engineering principles.",
-      "Participated in various projects that enhanced my programming skills.",
-      "Collaborated with peers to solve complex problems and improve system designs."
+      "Monitored over 1000 Darktrace alerts weekly and automated more than 10 threat reports per month.",
+      "Conducted research on 10+ APT groups to improve threat-hunting capabilities.",
+      "Participated in ransomware incident responses, documenting attacks to enhance mitigation strategies."
     ]
   },
   {
-    "title": "SWE Intern",
-    "company": "My Second Company",
-    "startDate": "2022-06-01",
-    "endDate": "2022-08-31",
+    "title": "Software Architect Intern",
+    "company": "Audi",
+    "startDate": "2024-01-10",
+    "endDate": "2024-05-10",
     "location": "Remote",
     "responsabilities": [
-      "Contributed to the development of software applications using modern technologies.",
-      "Worked closely with senior engineers to learn best practices in software development.",
-      "Assisted in debugging and testing software to ensure high quality."
+      "Designed an AI-integrated ergonomic evaluation system architecture using Azure and computer vision.",
+      "Reduced industrial ergonomic evaluation time by 55% with the proposed software solution."
+    ]
+  },
+  {
+    "title": "App Developer (Community Service)",
+    "company": "Dejando Huella",
+    "startDate": "2024-06-01",
+    "endDate": "2024-08-31",
+    "location": "Puebla, Mexico",
+    "responsabilities": [
+      "Developed a real-time chat engine for authenticated users within a Nuxt app using Firestore.",
+      "Provided communication tools for users to locate lost pets effectively."
+    ]
+  },
+  {
+    "title": "Full-Time Intern",
+    "company": "ALEPH Consulting & Data Science",
+    "startDate": "2023-05-01",
+    "endDate": "2023-07-31",
+    "location": "Remote",
+    "responsabilities": [
+      "Optimized data extraction and loading in Python and SQL, cutting execution time by 25%.",
+      "Automated secure backups to S3 and generated structured reports, improving process efficiency."
     ]
   }
 ]

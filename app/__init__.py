@@ -31,8 +31,7 @@ class TimelinePost(Model):
 
 mydb.connect()
 mydb.create_tables([TimelinePost])
-
-              
+        
 @app.route('/')
 def index():
     json_path_edu = os.path.join(app.root_path,"data", "education.json")
@@ -54,6 +53,9 @@ def hobbies():
 def map():
     return render_template('map.html', title="Places I've been to", url=os.getenv("URL"))
 
+@app.route('/timeline')
+def timeline():
+    return render_template('timeline.html', title="Timeline", url=os.getenv("URL"))
 
 @app.route('/api/timeline_post', methods=['POST'])
 def post_timelinePost():
@@ -73,6 +75,15 @@ def get_timelinePost():
 TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
+
+@app.route('/api/timeline_post/<int:id>', methods=['DELETE'])
+def delete_timelinePost(id):
+    try:
+        post = TimelinePost.get(TimelinePost.id == id)
+        post.delete_instance()
+        return {'status': 'success', 'message': 'Post deleted successfully'}
+    except TimelinePost.DoesNotExist:
+        return {'status': 'error', 'message': 'Post not found'}, 404
 
 if __name__ == "__main__":
     print(f"Server up. \n MySQL running:{mydb}")

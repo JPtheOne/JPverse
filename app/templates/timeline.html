@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #2b2d42;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .post {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .post h3 {
+            margin: 0;
+            color: #1a1a1a;
+        }
+
+        .post p {
+            margin: 0.5rem 0 0;
+            color: #444;
+        }
+
+        .post time {
+            font-size: 0.85rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header class="nav-bar">
+        <div class="nav-content">
+            <a href="/">
+                <div class="nav-logo">
+                    <img src="./static/img/logo.svg" />
+                </div>
+            </a>
+            <nav>
+                <a href="/" class="nav-link">Home</a>
+                <a href="/hobbies" class="nav-link">Hobbies</a>
+                <a href="/map" class="nav-link">Map</a>
+                <a href="/timeline" class="nav-link">Timeline</a>
+            </nav>
+        </div>
+    </header>
+    <div class="timeline">
+        <h1>📜 Timeline</h1>
+        <div id="posts-container">
+            <p>Loading posts...</p>
+        </div>
+    </div>
+
+    <script>
+        async function loadTimeline() {
+            try {
+                const res = await fetch("/api/timeline_post");
+                const data = await res.json();
+
+                const container = document.getElementById('posts-container');
+                container.innerHTML = "";
+
+                if (data.timeline_posts.length === 0) {
+                    container.innerHTML = "<p>No posts found.</p>";
+                    return;
+                }
+
+                data.timeline_posts.forEach(post => {
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'post';
+                    postDiv.innerHTML = `
+                        <h3>${post.name}</h3>
+                        <time>${new Date(post.created_at).toLocaleString()}</time>
+                        <p>${post.content}</p>
+                    `;
+                    container.appendChild(postDiv);
+                });
+            } catch (err) {
+                console.error("Failed to load timeline:", err);
+                document.getElementById('posts-container').innerHTML = "<p style='color:red;'>Failed to load posts.</p>";
+            }
+        }
+
+        loadTimeline();
+    </script>
+
+</body>
+</html>

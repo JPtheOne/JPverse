@@ -8,3 +8,4 @@ flask.sqlite
 .DS_Store
 
 example.env
+/extra

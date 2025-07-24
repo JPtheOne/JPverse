@@ -47,7 +47,7 @@ def index():
         experience = json.load(f)
     with open(json_path_edu) as f:
         education = json.load(f)
-    return render_template('index.html', title="Juan Pablo Morales (TESTING DOCKER!)", url=os.getenv("URL"), education=education, experience=experience)
+    return render_template('index.html', title="Juan Pablo Morales (TEssssssssSTING DOCKER!)", url=os.getenv("URL"), education=education, experience=experience)
 
 @app.route('/hobbies')
 def hobbies():

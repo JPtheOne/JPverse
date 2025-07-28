@@ -12,9 +12,6 @@ load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / ".env")
 load_dotenv()
 app = Flask(__name__)
 
-
-
-
 if os.getenv("TESTING")=="true":
     print("Running in test mode")
     mydb= SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
@@ -26,7 +23,6 @@ else:
         port=3306
     )
     
-
 class TimelinePost(Model):
     name = CharField()
     email = CharField()

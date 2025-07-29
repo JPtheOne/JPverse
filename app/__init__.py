@@ -37,13 +37,25 @@ mydb.create_tables([TimelinePost])
         
 @app.route('/')
 def index():
-    json_path_edu = os.path.join(app.root_path,"data", "education.json")
-    json_path_exp = os.path.join(app.root_path,"data", "experience.json")
-    with open(json_path_exp) as f:
-        experience = json.load(f)
+    json_path_edu = os.path.join(app.root_path, "data", "education.json")
+    json_path_exp = os.path.join(app.root_path, "data", "experience.json")
+    json_path_about = os.path.join(app.root_path, "data", "about.json")
+
     with open(json_path_edu) as f:
         education = json.load(f)
-    return render_template('index.html', title="Juan Pablo Morales", url=os.getenv("URL"), education=education, experience=experience)
+    with open(json_path_exp) as f:
+        experience = json.load(f)
+    with open(json_path_about) as f:
+        about = json.load(f)
+
+    return render_template(
+        'index.html',
+        title="Juan Pablo Morales",
+        url=os.getenv("URL"),
+        education=education,
+        experience=experience,
+        about_me=about
+    )
 
 @app.route('/hobbies')
 def hobbies():

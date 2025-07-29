@@ -5,6 +5,7 @@
     "startDate": "2024-04-01",
     "endDate": "Present",
     "location": "Remote",
+    "logo":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8Kyr0XLPz7ReLEHACMznn7e1r--seINbQjg&s",
     "responsabilities": [
       "Monitored over 1000 Darktrace alerts weekly and automated more than 10 threat reports per month.",
       "Conducted research on 10+ APT groups to improve threat-hunting capabilities.",
@@ -17,6 +18,7 @@
     "startDate": "2024-01-10",
     "endDate": "2024-05-10",
     "location": "Remote",
+    "logo":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuhGZQdM3raf6ncVl0XvvSNAA5j7E7L4Fcyw&s",
     "responsabilities": [
       "Designed an AI-integrated ergonomic evaluation system architecture using Azure and computer vision.",
       "Reduced industrial ergonomic evaluation time by 55% with the proposed software solution."
@@ -28,6 +30,7 @@
     "startDate": "2024-06-01",
     "endDate": "2024-08-31",
     "location": "Puebla, Mexico",
+    "logo":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2h1mtWWsr6wUGG3BWfkx544KZ2OjntYwvnA&s",
     "responsabilities": [
       "Developed a real-time chat engine for authenticated users within a Nuxt app using Firestore.",
       "Provided communication tools for users to locate lost pets effectively."
@@ -39,6 +42,7 @@
     "startDate": "2023-05-01",
     "endDate": "2023-07-31",
     "location": "Remote",
+    "logo":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_2vF9BVt3eLnKUecry4y3FQnPwkKicCgFqg&s",
     "responsabilities": [
       "Optimized data extraction and loading in Python and SQL, cutting execution time by 25%.",
       "Automated secure backups to S3 and generated structured reports, improving process efficiency."

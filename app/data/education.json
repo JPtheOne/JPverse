@@ -1,6 +1,7 @@
 [
     {
-        "school": "Universidad de las Americas Puebla",
+        "school": "Universidad de las Américas Puebla (UDLAP)",
+        "school_logo":"https://universidadesdemexico.mx/logos/original/logo-universidad-de-las-americas-de-puebla.webp",
         "degree": "Bachelor in Computer Systems Engineering",
         "startDate": "2020",
         "endDate": "2025",

@@ -151,11 +151,14 @@ section {
 .hobby-card h3 {
     color: #1C539F;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .hobby-card p {
     color: #666;
     line-height: 1.5;
+        text-align: center;
+
 }
 
 .section-content {
@@ -344,4 +347,18 @@ section {
   .exp-timeline-item::before {
     left: 0;
   }
+}
+
+
+.carousel {
+  max-width: 800px;
+  margin: 2rem auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.carousel img {
+  object-fit: cover;
+  height: 400px;
 }

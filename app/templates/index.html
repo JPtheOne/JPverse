@@ -55,6 +55,15 @@
                         <strong>{{about_me.title}} </strong>
                     </h3>
                     <p>{{about_me.body}}</p>
+{% set gallery = [
+  {"full": "./static/img/ab1.jpeg", "alt": "Photo 1"},
+  {"full": "./static/img/ab2.jpeg", "alt": "Photo 2"},
+  {"full": "./static/img/ab3.jpeg", "alt": "Photo 3"}
+] %}
+{% set gallery_id = "about-carousel" %}
+{% include "components/gallery_slider.html" %}
+
+
                 </div>
             </div>
         </section>

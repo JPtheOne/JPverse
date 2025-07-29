@@ -7,51 +7,131 @@
     </div>
   </div>
 
-    <div class="container py-4">
-        <div id="posts-container">
-            <p>Loading posts...</p>
-        </div>
+  <div class="container py-4">
+    <!-- FORMULARIO -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-body">
+        <h4 class="card-title">Leave a Comment</h4>
+        <form id="post-form">
+          <div class="mb-3">
+            <label for="name" class="form-label">Name*</label>
+            <input type="text" class="form-control" id="name" name="name" required maxlength="100">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email*</label>
+            <input type="email" class="form-control" id="email" name="email" required maxlength="100">
+          </div>
+          <div class="mb-3">
+            <label for="content" class="form-label">Comment*</label>
+            <textarea class="form-control" id="content" name="content" rows="3" required maxlength="500"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Post Comment</button>
+        </form>
+        <div id="form-message" class="mt-3"></div>
+      </div>
     </div>
 
+    <!-- CONTENEDOR DE POSTS -->
+    <div id="posts-container">
+      <p>Loading posts...</p>
+    </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
-    <script>
-        async function loadTimeline() {
-            try {
-                const res = await fetch("/api/timeline_post");
-                const data = await res.json();
+  <!-- JS PARA CARGAR Y ENVIAR COMENTARIOS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
+  <script>
+    function escapeHtml(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
 
-                const container = document.getElementById('posts-container');
-                container.innerHTML = "";
+    async function loadTimeline() {
+      try {
+        const res = await fetch("/api/timeline_post");
+        const data = await res.json();
+        const container = document.getElementById('posts-container');
+        container.innerHTML = "";
 
-                if (data.timeline_posts.length === 0) {
-                    container.innerHTML = "<p>No posts found.</p>";
-                    return;
-                }
-
-                data.timeline_posts.forEach(post => {
-                    const postDiv = document.createElement('div');
-                    postDiv.className = 'post border rounded p-3 mb-4 bg-white shadow-sm';
-
-                    const avatarUrl = `https://www.gravatar.com/avatar/${md5(post.email.trim().toLowerCase())}?d=identicon`;
-                    postDiv.innerHTML = `
-                        <div class="d-flex align-items-start">
-                            <img src="${avatarUrl}" alt="Avatar" class="rounded-circle me-3" width="50" height="50">
-                            <div>
-                                <h5 class="mb-1">${post.name}</h5>
-                                <small class="text-muted">${new Date(post.created_at).toLocaleString()}</small>
-                                <p class="mt-2 mb-0">${post.content}</p>
-                            </div>
-                        </div>
-                    `;
-                    container.appendChild(postDiv);
-                });
-            } catch (err) {
-                console.error("Failed to load timeline:", err);
-                document.getElementById('posts-container').innerHTML = "<p class='text-danger'>Failed to load posts.</p>";
-            }
+        if (data.timeline_posts.length === 0) {
+          container.innerHTML = "<p>No posts found.</p>";
+          return;
         }
 
-        loadTimeline();
-    </script>
+        data.timeline_posts.forEach(post => {
+          const postDiv = document.createElement('div');
+          postDiv.className = 'post border rounded p-3 mb-4 bg-white shadow-sm';
+
+          const avatarUrl = `https://www.gravatar.com/avatar/${md5(post.email.trim().toLowerCase())}?d=identicon`;
+
+          const name = escapeHtml(post.name);
+          const content = escapeHtml(post.content);
+          const createdAt = new Date(post.created_at).toLocaleString();
+
+          postDiv.innerHTML = `
+            <div class="d-flex align-items-start">
+              <img src="${avatarUrl}" alt="Avatar" class="rounded-circle me-3" width="50" height="50">
+              <div>
+                <h5 class="mb-1">${name}</h5>
+                <small class="text-muted">${createdAt}</small>
+                <p class="mt-2 mb-0">${content}</p>
+              </div>
+            </div>
+          `;
+          container.appendChild(postDiv);
+        });
+      } catch (err) {
+        console.error("Failed to load timeline:", err);
+        document.getElementById('posts-container').innerHTML = "<p class='text-danger'>Failed to load posts.</p>";
+      }
+    }
+
+    document.getElementById('post-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const content = document.getElementById('content').value.trim();
+
+      const formMessage = document.getElementById('form-message');
+      formMessage.textContent = "";
+
+      if (!name || !email || !content) {
+        formMessage.textContent = "All fields are required.";
+        formMessage.className = "text-danger";
+        return;
+      }
+
+      try {
+        const res = await fetch("/api/timeline_post", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: new URLSearchParams({ name, email, content })
+        });
+
+        const result = await res.json();
+
+        if (res.status === 200) {
+          formMessage.textContent = "Comment posted successfully.";
+          formMessage.className = "text-success";
+          e.target.reset();
+          loadTimeline();
+        } else {
+          formMessage.textContent = result.error || "An error occurred.";
+          formMessage.className = "text-danger";
+        }
+      } catch (err) {
+        console.error(err);
+        formMessage.textContent = "Failed to post comment.";
+        formMessage.className = "text-danger";
+      }
+    });
+
+    loadTimeline();
+  </script>
 {% endblock %}

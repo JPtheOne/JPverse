@@ -7,15 +7,25 @@
     </div>
   </div>
 
-  <div class="container">
-    <div class="hobbies-grid">
-      {% for hobby in hobbies %}
-        <div class="hobby-card">
-          <img src="{{ hobby.image }}" alt="{{ hobby.name }}">
+<div id="hobbyCarousel" class="carousel slide container" data-bs-ride="carousel" data-bs-interval="3000">
+  <div class="carousel-inner">
+    {% for hobby in hobbies %}
+      <div class="carousel-item {% if loop.index0 == 0 %}active{% endif %}">
+        <div class="hobby-card text-center p-4">
+          <img src="{{ hobby.image }}" class="d-block mx-auto" alt="{{ hobby.name }}" style="max-height: 300px;">
           <h3>{{ hobby.name }}</h3>
           <p>{{ hobby.description }}</p>
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
   </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#hobbyCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hobbyCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
 {% endblock %}

@@ -3,12 +3,12 @@
     {
       "name": "Traveling",
       "description": "Exploring new countries and cultures around the world.",
-      "image": "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=500"
+      "image": "/static/img/t1.jpeg"
     },
     {
       "name": "Hiking",
       "description": "Trekking through mountains, forests, and scenic trails.",
-      "image": "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=500"
+      "image": "/static/img/h1.jpeg"
     },
    
     {
@@ -19,7 +19,7 @@
     {
       "name": "Music",
       "description": "Playing guitar, bass, drums, piano, and ukulele; creating music at home.",
-      "image": "https://images.unsplash.com/photo-1508780709619-79562169bc64?w=500"
+      "image": "/static/img/m1.jpeg"
     },
     {
       "name": "Cybersecurity Challenges",

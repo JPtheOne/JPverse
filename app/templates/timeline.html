@@ -1,74 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
-        <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
-    <meta charset="UTF-8">
-    <title>{{ title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f7f9fc;
-            padding: 2rem;
-        }
+{% extends "base.html" %}
 
-        h1 {
-            color: #2b2d42;
-        }
+{% block content %}
+  <div class="banner" style="background-color: #3e7dd4 !important; text-align:left; padding: 20px;">
+    <div class="container">
+      <h1 class="title">{{ title }}</h1>
+    </div>
+  </div>
 
-        .timeline {
-            max-width: 800px;
-            margin: auto;
-        }
-
-        .post {
-            background: white;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        }
-
-        .post h3 {
-            margin: 0;
-            color: #1a1a1a;
-        }
-
-        .post p {
-            margin: 0.5rem 0 0;
-            color: #444;
-        }
-
-        .post time {
-            font-size: 0.85rem;
-            color: #888;
-        }
-    </style>
-</head>
-<body>
-    <header class="nav-bar">
-        <div class="nav-content">
-            <a href="/">
-                <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
-                </div>
-            </a>
-            <nav>
-                <a href="/" class="nav-link">Home</a>
-                <a href="/hobbies" class="nav-link">Hobbies</a>
-                <a href="/map" class="nav-link">Map</a>
-                <a href="/timeline" class="nav-link">Timeline</a>
-            </nav>
-        </div>
-    </header>
-    <div class="timeline">
-        <h1>📜 Timeline</h1>
+    <div class="container py-4">
         <div id="posts-container">
             <p>Loading posts...</p>
         </div>
     </div>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-md5/2.19.0/js/md5.min.js"></script>
     <script>
         async function loadTimeline() {
             try {
@@ -85,30 +31,27 @@
 
                 data.timeline_posts.forEach(post => {
                     const postDiv = document.createElement('div');
-                    postDiv.className = 'post';
+                    postDiv.className = 'post border rounded p-3 mb-4 bg-white shadow-sm';
 
                     const avatarUrl = `https://www.gravatar.com/avatar/${md5(post.email.trim().toLowerCase())}?d=identicon`;
                     postDiv.innerHTML = `
-                        <img src="${avatarUrl}" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; float: left; margin-right: 10px;">
-                    `;
-                    postDiv.innerHTML += `
-                        <div style="overflow: hidden;">
-                            <h3>${post.name}</h3>
-                            <time>${new Date(post.created_at).toLocaleString()}</time>
-                            <p>${post.content}</p>
+                        <div class="d-flex align-items-start">
+                            <img src="${avatarUrl}" alt="Avatar" class="rounded-circle me-3" width="50" height="50">
+                            <div>
+                                <h5 class="mb-1">${post.name}</h5>
+                                <small class="text-muted">${new Date(post.created_at).toLocaleString()}</small>
+                                <p class="mt-2 mb-0">${post.content}</p>
+                            </div>
                         </div>
                     `;
-                    postDiv.style.clear = "both";
                     container.appendChild(postDiv);
                 });
             } catch (err) {
                 console.error("Failed to load timeline:", err);
-                document.getElementById('posts-container').innerHTML = "<p style='color:red;'>Failed to load posts.</p>";
+                document.getElementById('posts-container').innerHTML = "<p class='text-danger'>Failed to load posts.</p>";
             }
         }
 
         loadTimeline();
     </script>
-
-</body>
-</html>
+{% endblock %}

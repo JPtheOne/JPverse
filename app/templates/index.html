@@ -1,77 +1,82 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="profile">
-    <div id="profile-picture" class="profile-picture">
-      <img src="{{ url_for('static', filename='img/pp.jpg') }}">
-    </div>
-    <h1>{{ title }}</h1>
-  </div>
+  <div class="custom-background">
+    <div class="main-content container py-4">
 
-  <section>
-    <button class="toggle-button" onclick="toggleSection('about')">About Me</button>
-    <div id="about" class="section-content">
-      <div class="section-card">
-        <h3><strong>{{ about_me.title }}</strong></h3>
-        <p>{{ about_me.body }}</p>
-
-        {% set gallery = [
-          {"full": "./static/img/ab1.jpeg", "alt": "Photo 1"},
-          {"full": "./static/img/ab2.jpeg", "alt": "Photo 2"},
-          {"full": "./static/img/ab3.jpeg", "alt": "Photo 3"}
-        ] %}
-        {% set gallery_id = "about-carousel" %}
-        {% include "components/gallery_slider.html" %}
+      <div class="profile">
+        <div id="profile-picture" class="profile-picture">
+          <img src="{{ url_for('static', filename='img/pp.jpg') }}">
+        </div>
+        <h1>{{ title }}</h1>
       </div>
-    </div>
-  </section>
 
-  <section>
-    <button class="toggle-button" onclick="toggleSection('education')">Education</button>
-    <div id="education" class="section-content">
-      {% for edu in education %}
-      <div class="section-card">
-        <h3>{{ edu.school }}</h3>
-        <img src="{{ edu.school_logo }}" style="height: 100px; vertical-align: middle;">
-        <p><strong>{{ edu.degree }}</strong> | {{ edu.startDate }} - {{ edu.endDate }}</p>
-        <p>GPA {{ edu.gpa }}</p>
-      </div>
-      {% endfor %}
-    </div>
-  </section>
+      <section>
+        <button class="toggle-button" onclick="toggleSection('about')">About Me</button>
+        <div id="about" class="section-content">
+          <div class="section-card">
+            <h3><strong>{{ about_me.title }}</strong></h3>
+            <p>{{ about_me.body }}</p>
 
-  <section>
-    <button class="toggle-button" onclick="toggleSection('experience')">Experience</button>
-    <div id="experience" class="section-content">
-      <div class="exp-timeline">
-        {% for exp in experience %}
-        <div class="exp-timeline-item {% if loop.index is even %}right{% else %}left{% endif %}">
-          <div class="exp-content">
-            <span class="exp-date">{{ exp.startDate }} - {{ exp.endDate }}</span>
-            <h3 class="exp-title">
-              {{ exp.title }} <br>
-              <strong>
-                <img src="{{ exp.logo }}" alt="{{ exp.company }}" style="height: 1em; vertical-align: middle;">
-                {{ exp.company }}
-              </strong>
-            </h3>
-            <p><strong>Location:</strong> {{ exp.location }}</p>
-            <ul class="list">
-              {% for resp in exp.responsabilities %}
-              <li>{{ resp }}</li>
-              {% endfor %}
-            </ul>
+            {% set gallery = [
+              {"full": "./static/img/ab1.jpeg", "alt": "Photo 1"},
+              {"full": "./static/img/ab2.jpeg", "alt": "Photo 2"},
+              {"full": "./static/img/ab3.jpeg", "alt": "Photo 3"}
+            ] %}
+            {% set gallery_id = "about-carousel" %}
+            {% include "components/gallery_slider.html" %}
           </div>
         </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <script>
-    function toggleSection(id) {
-      const el = document.getElementById(id);
-      el.classList.toggle("active");
-    }
-  </script>
+      <section>
+        <button class="toggle-button" onclick="toggleSection('education')">Education</button>
+        <div id="education" class="section-content">
+          {% for edu in education %}
+          <div class="section-card">
+            <h3>{{ edu.school }}</h3>
+            <img src="{{ edu.school_logo }}" style="height: 100px; vertical-align: middle;">
+            <p><strong>{{ edu.degree }}</strong> | {{ edu.startDate }} - {{ edu.endDate }}</p>
+            <p>GPA {{ edu.gpa }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section>
+        <button class="toggle-button" onclick="toggleSection('experience')">Experience</button>
+        <div id="experience" class="section-content">
+          <div class="exp-timeline">
+            {% for exp in experience %}
+            <div class="exp-timeline-item {% if loop.index is even %}right{% else %}left{% endif %}">
+              <div class="exp-content">
+                <span class="exp-date">{{ exp.startDate }} - {{ exp.endDate }}</span>
+                <h3 class="exp-title">
+                  {{ exp.title }} <br>
+                  <strong>
+                    <img src="{{ exp.logo }}" alt="{{ exp.company }}" style="height: 1em; vertical-align: middle;">
+                    {{ exp.company }}
+                  </strong>
+                </h3>
+                <p><strong>Location:</strong> {{ exp.location }}</p>
+                <ul class="list">
+                  {% for resp in exp.responsabilities %}
+                  <li>{{ resp }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
+      <script>
+        function toggleSection(id) {
+          const el = document.getElementById(id);
+          el.classList.toggle("active");
+        }
+      </script>
+    </div> <!-- main-content -->
+  </div> <!-- custom-background -->
 {% endblock %}

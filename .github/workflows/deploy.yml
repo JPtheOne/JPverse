@@ -34,7 +34,7 @@ jobs:
       - name: Capture Container Status
         id: container_status
         run: |
-          status_output=$(ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && docker-compose ps')
+          status_output=$(ssh my-vps 'cd ${{ secrets.PROJECT_ROOT }} && docker ps')
           echo "status<<EOF" >> $GITHUB_OUTPUT
           echo "$status_output" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT

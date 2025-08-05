@@ -10,8 +10,6 @@ jobs:
   deploy:
     name: "Deploy to VPS"
     runs-on: ubuntu-latest
-    outputs:
-      error_log: ${{ steps.deploy_site.outputs.error_log }}
     steps:
       - name: Configure SSH
         run: |
@@ -34,10 +32,7 @@ jobs:
         id: deploy_site
         run: |
           set -o pipefail
-          ssh my-vps '~/redeploySite.sh' 2> error.log || true
-          echo "error_log<<EOF" >> $GITHUB_OUTPUT
-          cat error.log >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
+          ssh my-vps '~/redeploySite.sh'
 
       - name: Capture Container Status
         id: container_status
@@ -50,38 +45,20 @@ jobs:
       - name: Notify Discord - Success
         if: success()
         run: |
-          echo '{
-            "content": "🚀 **Deployment Successful**",
-            "embeds": [ {
-              "title": "New Deployment to VPS",
-              "fields": [
-                { "name": "Author", "value": "${{ github.actor }}", "inline": true },
-                { "name": "Time", "value": "${{ github.event.head_commit.timestamp }}", "inline": true },
-                { "name": "Commit", "value": "${{ github.event.head_commit.message }}" },
-                { "name": "Container Status", "value": "```${{ steps.container_status.outputs.status }}```" }
-              ]
-            }]
-          }' > payload.json
-          curl -s -X POST -H "Content-Type: application/json" -d @payload.json "${{ secrets.DISCORD_WEBHOOK }}"
+          STATUS="${{ steps.container_status.outputs.status }}"
+          ESCAPED_STATUS=$(echo "$STATUS" | sed ':a;N;$!ba;s/\n/\\n/g')
+          curl -s -X POST -H "Content-Type: application/json" \
+            -d "{\"content\": \"🚀 Deployment Successful\n👤 Author: ${{ github.actor }}\n📝 Commit: ${{ github.event.head_commit.message }}\n📦 Container Status:\n\`\`\`${ESCAPED_STATUS}\`\`\`\"}" \
+            "${{ secrets.DISCORD_WEBHOOK }}"
 
   notify-failure:
-    name: "Notify Discord - Failure"
+    name: Notify Discord - Failure
     runs-on: ubuntu-latest
     needs: deploy
     if: failure()
     steps:
       - name: Notify Discord with error
         run: |
-          echo '{
-            "content": "🚨 **Deployment Failed**",
-            "embeds": [ {
-              "title": "Error Report",
-              "fields": [
-                { "name": "Author", "value": "${{ github.actor }}", "inline": true },
-                { "name": "Time", "value": "${{ github.event.head_commit.timestamp }}", "inline": true },
-                { "name": "Commit", "value": "${{ github.event.head_commit.message }}" },
-                { "name": "Error Log", "value": "```${{ needs.deploy.outputs.error_log }}```" }
-              ]
-            }]
-          }' > fail_payload.json
-          curl -s -X POST -H "Content-Type: application/json" -d @fail_payload.json "${{ secrets.DISCORD_WEBHOOK }}"
+          curl -s -X POST -H "Content-Type: application/json" \
+            -d "{\"content\": \"🚨 Deployment Failed by ${{ github.actor }} on commit: ${{ github.event.head_commit.message }}\"}" \
+            "${{ secrets.DISCORD_WEBHOOK }}"

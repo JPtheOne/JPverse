@@ -44,6 +44,7 @@ jobs:
 
       - name: Notify Discord - Success
         if: success()
+        shell: bash
         run: |
           STATUS="${{ steps.container_status.outputs.status }}"
           ESCAPED_STATUS=$(echo "$STATUS" | sed ':a;N;$!ba;s/\n/\\n/g')

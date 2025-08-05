@@ -50,7 +50,7 @@ def index():
 
     return render_template(
         'index.html',
-        title="Juan Pablo Morales - Testing Push",
+        title="Juan Pablo Morales",
         url=os.getenv("URL"),
         education=education,
         experience=experience,

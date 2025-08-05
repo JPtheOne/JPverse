@@ -10,6 +10,8 @@ jobs:
   deploy:
     name: "Deploy to VPS"
     runs-on: ubuntu-latest
+    outputs:
+      error_log: ${{ steps.deploy_site.outputs.error_log }}
     steps:
       - name: Configure SSH
         run: |
@@ -29,7 +31,13 @@ jobs:
           SSH_IP: ${{ secrets.SSH_IP }}
 
       - name: Deploy Site
-        run: ssh my-vps '~/redeploySite.sh'
+        id: deploy_site
+        run: |
+          set -o pipefail
+          ssh my-vps '~/redeploySite.sh' 2> error.log || true
+          echo "error_log<<EOF" >> $GITHUB_OUTPUT
+          cat error.log >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Capture Container Status
         id: container_status
@@ -44,7 +52,7 @@ jobs:
         run: |
           echo '{
             "content": "🚀 **Deployment Successful**",
-            "embeds": [{
+            "embeds": [ {
               "title": "New Deployment to VPS",
               "fields": [
                 { "name": "Author", "value": "${{ github.actor }}", "inline": true },
@@ -62,8 +70,18 @@ jobs:
     needs: deploy
     if: failure()
     steps:
-      - name: Send failure notification
+      - name: Notify Discord with error
         run: |
-          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
-          -H "Content-Type: application/json" \
-          -d "{\"content\": \"🚨 Deployment Failed by ${{ github.actor }} on commit: ${{ github.event.head_commit.message }}\"}"
+          echo '{
+            "content": "🚨 **Deployment Failed**",
+            "embeds": [ {
+              "title": "Error Report",
+              "fields": [
+                { "name": "Author", "value": "${{ github.actor }}", "inline": true },
+                { "name": "Time", "value": "${{ github.event.head_commit.timestamp }}", "inline": true },
+                { "name": "Commit", "value": "${{ github.event.head_commit.message }}" },
+                { "name": "Error Log", "value": "```${{ needs.deploy.outputs.error_log }}```" }
+              ]
+            }]
+          }' > fail_payload.json
+          curl -s -X POST -H "Content-Type: application/json" -d @fail_payload.json "${{ secrets.DISCORD_WEBHOOK }}"

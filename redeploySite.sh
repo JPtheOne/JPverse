@@ -10,17 +10,19 @@ cd /root/JPverse || { echo "Project folder not found at /root/JPverse"; exit 1; 
 echo "Resetting local Git state to origin/main..."
 git fetch && git reset origin/main --hard || { echo "Git fetch/reset failed."; exit 1; }
 
-# Step 3: Stop running containers gracefully
+# Step 3: Stop and remove only JPverse containers (not shared networks)
 echo "Stopping existing JPverse containers..."
-if docker ps --format '{{.Names}}' | grep -q 'jpverse'; then
-    docker-compose -f docker-compose.prod.yml stop || echo "Warning: stop failed but continuing..."
-    docker-compose -f docker-compose.prod.yml rm -f || echo "Warning: rm failed but continuing..."
-else
-    echo "No existing JPverse containers found."
-fi
+docker-compose -f docker-compose.prod.yml stop || echo "No containers to stop."
 
-# Step 4: Rebuild and start containers without removing shared networks
-echo "Building and starting Docker containers..."
+echo "Removing old JPverse containers (ignoring shared networks)..."
+docker-compose -f docker-compose.prod.yml rm -f || echo "No containers to remove."
+
+# 🔒 Protect shared network from removal errors
+echo "Ensuring webnet exists..."
+docker network inspect webnet >/dev/null 2>&1 || docker network create webnet || true
+
+# Step 4: Rebuild and start fresh
+echo "Building and starting JPverse containers..."
 docker-compose -f docker-compose.prod.yml up -d --build || { echo "Docker Compose build failed."; exit 1; }
 
-echo "Deployment complete. Containers are running."
+echo "✅ Deployment complete. JPverse containers are running."

@@ -11,10 +11,10 @@ git fetch && git reset origin/main --hard || { echo "Git fetch/reset failed."; e
 
 # Step 3: Stop containers to prevent memory issues
 echo "Stopping existing Docker containers..."
-docker compose -f docker-compose.prod.yml down || { echo "Failed to stop containers."; exit 1; }
+docker-compose -f docker-compose.prod.yml down || { echo "Failed to stop containers."; exit 1; }
 
 # Step 4: Rebuild and start containers
 echo "Building and starting Docker containers..."
-docker compose -f docker-compose.prod.yml up -d --build || { echo "Docker Compose build failed."; exit 1; }
+docker-compose -f docker-compose.prod.yml up -d --build || { echo "Docker Compose build failed."; exit 1; }
 
 echo "Deployment complete. Containers are running."

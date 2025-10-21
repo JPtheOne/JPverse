@@ -17,21 +17,22 @@ services:
     volumes:
       - mydatabase:/var/lib/mysql
 
-  nginx:
-    container_name: nginx
+nginx:
     image: jonasal/nginx-certbot
-    restart: always
+    container_name: nginx
+    restart: unless-stopped
     environment:
       - CERTBOT_EMAIL=juanpimod@gmail.com
+      - CERTBOT_DOMAINS=jp-verse.duckdns.org,facturador.duckdns.org
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - nginx_secrets:/etc/letsencrypt
-      - /root/nginx_confs:/etc/nginx/user_conf.d    
-    depends_on:
-      - myportfolio
-
+      - /root/nginx_confs:/etc/nginx/conf.d
+      - /root/nginx_confs/letsencrypt:/etc/letsencrypt
+      - /var/lib/letsencrypt:/var/lib/letsencrypt
+    networks:
+      - webnet
 volumes:
   mydatabase:
   nginx_secrets:

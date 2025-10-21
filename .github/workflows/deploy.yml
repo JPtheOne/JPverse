@@ -29,7 +29,7 @@ jobs:
           SSH_IP: ${{ secrets.SSH_IP }}
 
       - name: Deploy Site
-        run: ssh my-vps '~/JPverse/redeploySite.sh'
+        run: ssh my-vps 'chmod +x ~/JPverse/redeploySite.sh && ~/JPverse/redeploySite.sh'
 
       - name: Check Docker Container Status
         run: |

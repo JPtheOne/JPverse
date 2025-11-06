@@ -1,15 +1,19 @@
 version: "3"
-
 services:
   myportfolio:
     build: .
+    container_name: myportfolio
     restart: always
     env_file:
       - .env
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - "5002:5000"  
+    volumes:
+      - .:/myportfolio
     depends_on:
       - mysql
-    networks:
-      - webnet
 
   mysql:
     container_name: mysql
@@ -19,32 +23,6 @@ services:
       - .env
     volumes:
       - mydatabase:/var/lib/mysql
-    networks:
-      - webnet
-
-  nginx:
-    image: jonasal/nginx-certbot
-    container_name: nginx
-    restart: unless-stopped
-    environment:
-      - CERTBOT_EMAIL=juanpimod@gmail.com
-      - CERTBOT_DOMAINS=jp-verse.duckdns.org,facturador.duckdns.org
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /root/nginx_confs:/etc/nginx/conf.d
-      - /root/nginx_confs/letsencrypt:/etc/letsencrypt
-      - /var/lib/letsencrypt:/var/lib/letsencrypt
-    depends_on:
-      - myportfolio
-    networks:
-      - webnet
 
 volumes:
   mydatabase:
-  nginx_secrets:
-
-networks:
-  webnet:
-    external: true

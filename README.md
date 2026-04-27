@@ -32,6 +32,6 @@ Stay up to date with what’s new and what’s coming next in my portfolio!
 - [ ] Include zone to use and watch demos
 
 ### Next Steps:
-- Correcting CI/CD flow by adding more verbous Discord notifications
+- Correcting CI/CD flow by adding more verbous Discord notifications 
 - Include connectivity test
 - Add Projects section

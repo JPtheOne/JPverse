@@ -1,0 +1,12 @@
+[
+  { "name": "Kali Linux", "category": "OS" },
+  { "name": "Burp Suite", "category": "web" },
+  { "name": "Nmap", "category": "recon" },
+  { "name": "Metasploit", "category": "exploit" },
+  { "name": "Frida", "category": "dynamic" },
+  { "name": "Magisk", "category": "android" },
+  { "name": "Wireshark", "category": "network" },
+  { "name": "ADB", "category": "android" },
+  { "name": "Ghidra", "category": "reverse" },
+  { "name": "SQLMap", "category": "web" }
+]

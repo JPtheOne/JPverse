@@ -1,0 +1,6 @@
+{
+  "languages": ["Python", "Kotlin", "JavaScript", "Bash"],
+  "frameworks": ["Flask", "FastAPI", "Android SDK", "Bootstrap"],
+  "tools": ["Docker", "Nginx", "Git", "GitHub Actions", "ADB"],
+  "platforms": ["Linux", "Android", "VPS/Cloud"]
+}

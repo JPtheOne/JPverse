@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="cyber-hero">
+  <div class="cyber-label">// software engineering</div>
+  <h1>Building tools<br>that <span>matter</span>.</h1>
+  <p>Systems programmer, Android developer, infrastructure builder. Focused on security-conscious software for real-world impact.</p>
+</section>
+
+<div class="cyber-divider"></div>
+
+<section class="cyber-section">
+  <div class="cyber-section-title">projects</div>
+  <div class="project-grid">
+    {% for project in projects %}
+    <div class="project-card">
+      <span class="status-badge status-{{ project.status | replace(' ', '-') }}">{{ project.status }}</span>
+      <h3>{{ project.name }}</h3>
+      <p>{{ project.description }}</p>
+      <div class="tech-tags">
+        {% for tech in project.tech %}
+        <span class="tech-tag">{{ tech }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="cyber-divider"></div>
+
+<section class="cyber-section">
+  <div class="cyber-section-title">stack</div>
+  <div class="stack-grid">
+    {% for category, items in stack.items() %}
+    <div class="stack-group">
+      <h4>{{ category }}</h4>
+      {% for item in items %}
+      <div class="stack-item">{{ item }}</div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

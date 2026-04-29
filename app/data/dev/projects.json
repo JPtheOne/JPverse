@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Lethal Pill",
+    "description": "Android panic/kill switch app for users at risk. One-tap data wipe + remote trigger via Firebase FCM. Built for journalists and activists in hostile environments.",
+    "tech": ["Kotlin", "Android SDK", "Device Admin API", "Firebase FCM", "FastAPI"],
+    "status": "active",
+    "github": null,
+    "highlight": true
+  },
+  {
+    "name": "JPverse",
+    "description": "This portfolio. Flask app factory with Jinja2 templates, deployed on a VPS via Docker + Nginx with GitHub Actions CI/CD on every push to main.",
+    "tech": ["Python", "Flask", "Docker", "Nginx", "GitHub Actions", "Jinja2"],
+    "status": "active",
+    "github": null
+  },
+  {
+    "name": "Poco X6 Root Lab",
+    "description": "Research project exploring the security model of Xiaomi Poco X6. Bootloader unlock, Magisk integration, and custom module development for device instrumentation.",
+    "tech": ["Android", "Magisk", "ADB", "Fastboot", "Frida"],
+    "status": "in-progress",
+    "github": null
+  }
+]

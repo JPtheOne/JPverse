@@ -1,82 +1,314 @@
 {% extends "base.html" %}
 
+{% block styles %}
+<style>
+  /* ── Hero ───────────────────────────────────────── */
+  .home-hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px 60px;
+  }
+
+  .home-tagline {
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0 0 28px;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+  }
+
+  .home-roles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 36px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .home-roles .dot { color: var(--accent); }
+
+  .home-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* Photo frame */
+  .home-hero-photo {
+    position: relative;
+    width: 220px;
+    flex-shrink: 0;
+  }
+
+  .home-hero-photo img {
+    width: 220px;
+    height: 280px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
+    display: block;
+    filter: grayscale(15%);
+    border: 1px solid var(--border-md);
+  }
+
+  .home-hero-photo::before {
+    content: '';
+    position: absolute;
+    inset: -5px;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .home-hero-photo::after {
+    content: '';
+    position: absolute;
+    inset: 10px -10px -10px 10px;
+    border: 1px solid var(--accent);
+    border-radius: 4px;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  /* ── Highlights ─────────────────────────────────── */
+  .highlight-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .highlight-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+
+  .highlight-card .bg-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.06;
+    transition: opacity 0.2s;
+  }
+
+  .highlight-card:hover { border-color: var(--accent); transform: translateY(-2px); opacity: 1; }
+  .highlight-card:hover .bg-img { opacity: 0.12; }
+
+  .highlight-card .card-label {
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .highlight-card h3 {
+    font-family: 'Courier New', monospace;
+    font-size: 1.3rem;
+    color: var(--text);
+    margin: 0 0 12px;
+  }
+
+  .highlight-card p {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin: 0 0 20px;
+  }
+
+  .highlight-card .card-arrow {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 1px;
+  }
+
+  .highlight-card.sec-card { --accent: #00ff95; }
+
+  /* ── Quick nav ──────────────────────────────────── */
+  .quicknav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+  }
+
+  .quicknav-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: border-color 0.15s, color 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .quicknav-item:hover { border-color: var(--accent); color: var(--accent); opacity: 1; }
+  .quicknav-item .nav-icon { font-size: 20px; color: var(--accent); opacity: 0.7; }
+
+  .quicknav-item.soon { opacity: 0.3; cursor: default; pointer-events: none; }
+
+  /* ── Responsive ─────────────────────────────────── */
+  @media (max-width: 768px) {
+    .home-hero {
+      grid-template-columns: 1fr;
+      padding: 60px 20px 40px;
+      gap: 40px;
+    }
+    .home-hero-photo { width: 160px; margin: 0 auto; }
+    .home-hero-photo img { width: 160px; height: 200px; }
+  }
+</style>
+{% endblock %}
+
 {% block content %}
-  <div class="custom-background">
-    <div class="main-content container py-4">
 
-      <div class="profile">
-        <div id="profile-picture" class="profile-picture">
-          <img src="{{ url_for('static', filename='img/pp.jpg') }}">
-        </div>
-        <h1>{{ title }}</h1>
+<!-- ── Hero ────────────────────────────────────────────── -->
+<section class="home-hero">
+  <div class="home-hero-text">
+    <div class="cyber-label">// juan_pablo_morales.init()</div>
+    <h1 style="font-family:'Courier New',monospace; font-size:clamp(2.5rem,6vw,4rem); font-weight:700; line-height:1.1; margin:0 0 24px;">
+      Juan Pablo<br><span style="color:var(--accent);">Morales</span>.
+    </h1>
+    <p class="home-tagline">
+      I build what I break,<br>and break what I build.
+    </p>
+    <div class="home-roles">
+      <span>Engineer</span><span class="dot">·</span>
+      <span>Analyst</span><span class="dot">·</span>
+      <span>Researcher</span><span class="dot">·</span>
+      <span>Explorer</span>
+    </div>
+    <div class="home-ctas">
+      <a href="#highlights" class="cyber-btn filled">View Work</a>
+      <a href="#explore" class="cyber-btn">Explore</a>
+    </div>
+  </div>
+
+  <div class="home-hero-photo">
+    <img src="{{ url_for('static', filename='img/pp.jpg') }}" alt="Juan Pablo Morales">
+  </div>
+</section>
+
+<div class="cyber-divider"></div>
+
+<!-- ── Highlights ──────────────────────────────────────── -->
+<section class="cyber-section" id="highlights">
+  <div class="cyber-section-title">highlights</div>
+  <div class="highlight-grid">
+
+    <a href="/dev" class="highlight-card">
+      <div class="card-label">software engineering</div>
+      <h3>Dev</h3>
+      <p>Android apps, backend systems, and infrastructure. Building tools that ship and survive the real world.</p>
+      <div class="tech-tags" style="margin-bottom:20px;">
+        <span class="tech-tag">Python</span>
+        <span class="tech-tag">Kotlin</span>
+        <span class="tech-tag">Docker</span>
       </div>
+      <div class="card-arrow">→ explore /dev</div>
+    </a>
 
-      <section>
-        <button class="toggle-button" onclick="toggleSection('about')">About Me</button>
-        <div id="about" class="section-content">
-          <div class="section-card">
-            <h3><strong>{{ about_me.title }}</strong></h3>
-            <p>{{ about_me.body }}</p>
+    <a href="/sec" class="highlight-card sec-card">
+      <div class="card-label">cybersecurity</div>
+      <h3>Sec</h3>
+      <p>Security research, mobile analysis, and threat modeling. Breaking things with purpose.</p>
+      <div class="tech-tags" style="margin-bottom:20px;">
+        <span class="tech-tag">Frida</span>
+        <span class="tech-tag">Burp Suite</span>
+        <span class="tech-tag">Kali</span>
+      </div>
+      <div class="card-arrow">→ explore /sec</div>
+    </a>
 
-            {% set gallery = [
-              {"full": "./static/img/ab1.jpeg", "alt": "Photo 1"},
-              {"full": "./static/img/ab2.jpeg", "alt": "Photo 2"},
-              {"full": "./static/img/ab3.jpeg", "alt": "Photo 3"}
-            ] %}
-            {% set gallery_id = "about-carousel" %}
-            {% include "components/gallery_slider.html" %}
-          </div>
-        </div>
-      </section>
+    <a href="/dev" class="highlight-card">
+      <div class="bg-img" style="background-image:url({{ url_for('static', filename='img/ab1.jpeg') }});"></div>
+      <div class="card-label">featured project</div>
+      <h3>Lethal Pill</h3>
+      <p>Android panic/kill switch for journalists and activists in hostile environments. One tap, total wipe.</p>
+      <div class="tech-tags" style="margin-bottom:20px;">
+        <span class="tech-tag">Kotlin</span>
+        <span class="tech-tag">Device Admin API</span>
+        <span class="tech-tag">Firebase</span>
+      </div>
+      <div class="card-arrow">→ view project</div>
+    </a>
 
-      <section>
-        <button class="toggle-button" onclick="toggleSection('education')">Education</button>
-        <div id="education" class="section-content">
-          {% for edu in education %}
-          <div class="section-card">
-            <h3>{{ edu.school }}</h3>
-            <img src="{{ edu.school_logo }}" style="height: 100px; vertical-align: middle;">
-            <p><strong>{{ edu.degree }}</strong> | {{ edu.startDate }} - {{ edu.endDate }}</p>
-            <p>GPA {{ edu.gpa }}</p>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
+  </div>
+</section>
 
-      <section>
-        <button class="toggle-button" onclick="toggleSection('experience')">Experience</button>
-        <div id="experience" class="section-content">
-          <div class="exp-timeline">
-            {% for exp in experience %}
-            <div class="exp-timeline-item {% if loop.index is even %}right{% else %}left{% endif %}">
-              <div class="exp-content">
-                <span class="exp-date">{{ exp.startDate }} - {{ exp.endDate }}</span>
-                <h3 class="exp-title">
-                  {{ exp.title }} <br>
-                  <strong>
-                    <img src="{{ exp.logo }}" alt="{{ exp.company }}" style="height: 1em; vertical-align: middle;">
-                    {{ exp.company }}
-                  </strong>
-                </h3>
-                <p><strong>Location:</strong> {{ exp.location }}</p>
-                <ul class="list">
-                  {% for resp in exp.responsabilities %}
-                  <li>{{ resp }}</li>
-                  {% endfor %}
-                </ul>
-              </div>
-            </div>
-            {% endfor %}
-          </div>
-        </div>
-      </section>
+<div class="cyber-divider"></div>
 
-      <script>
-        function toggleSection(id) {
-          const el = document.getElementById(id);
-          el.classList.toggle("active");
-        }
-      </script>
-    </div> <!-- main-content -->
-  </div> <!-- custom-background -->
+<!-- ── Quick nav ────────────────────────────────────────── -->
+<section class="cyber-section" id="explore">
+  <div class="cyber-section-title">explore</div>
+  <div class="quicknav-grid">
+
+    <a href="/dev" class="quicknav-item">
+      <i class="bi bi-code-slash nav-icon"></i>
+      <span>Dev</span>
+    </a>
+    <a href="/sec" class="quicknav-item">
+      <i class="bi bi-shield-lock nav-icon"></i>
+      <span>Sec</span>
+    </a>
+    <a href="/map" class="quicknav-item">
+      <i class="bi bi-globe nav-icon"></i>
+      <span>Travel</span>
+    </a>
+    <a href="/timeline" class="quicknav-item">
+      <i class="bi bi-clock-history nav-icon"></i>
+      <span>Timeline</span>
+    </a>
+    <a href="/hobbies" class="quicknav-item">
+      <i class="bi bi-lightning nav-icon"></i>
+      <span>Hobbies</span>
+    </a>
+    <span class="quicknav-item soon">
+      <i class="bi bi-person nav-icon"></i>
+      <span>About</span>
+    </span>
+    <span class="quicknav-item soon">
+      <i class="bi bi-briefcase nav-icon"></i>
+      <span>Experience</span>
+    </span>
+    <span class="quicknav-item soon">
+      <i class="bi bi-mortarboard nav-icon"></i>
+      <span>Education</span>
+    </span>
+    <span class="quicknav-item soon">
+      <i class="bi bi-journal-code nav-icon"></i>
+      <span>Blog</span>
+    </span>
+    <span class="quicknav-item soon">
+      <i class="bi bi-envelope nav-icon"></i>
+      <span>Contact</span>
+    </span>
+
+  </div>
+</section>
+
 {% endblock %}

@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Lethal Pill",
+    "description": "Defensive Android app for high-risk users. Leverages Device Admin API for secure remote wipe. Threat model targets adversarial device seizure.",
+    "tech": ["Kotlin", "Device Admin API", "Firebase FCM", "Threat Modeling"],
+    "status": "active",
+    "category": "defensive"
+  },
+  {
+    "name": "Poco X6 Root Lab",
+    "description": "Security research into Xiaomi Poco X6 trust boundary. Analyzing bootloader, TEE, and kernel attack surface. Instrumenting runtime with Frida for dynamic analysis.",
+    "tech": ["Bootloader Analysis", "Magisk", "Frida", "ADB", "Fastboot"],
+    "status": "in-progress",
+    "category": "research"
+  }
+]

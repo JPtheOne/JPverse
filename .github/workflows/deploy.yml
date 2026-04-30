@@ -39,10 +39,40 @@ jobs:
 
       - name: Notify Discord - Success
         if: success()
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          COMMIT_SHA:      ${{ github.sha }}
+          COMMIT_MSG:      ${{ github.event.head_commit.message || 'Manual trigger' }}
+          COMMIT_URL:      ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+          RUN_URL:         ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ACTOR:           ${{ github.actor }}
+          BRANCH:          ${{ github.ref_name }}
+          TIMESTAMP:       ${{ github.event.head_commit.timestamp }}
         run: |
-          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
-          -H "Content-Type: application/json" \
-          -d "{\"content\": \"🚀 Deployment Successful\"}"
+          python3 << 'PYEOF' > /tmp/payload.json
+          import json, os
+          sha  = os.environ['COMMIT_SHA'][:7]
+          msg  = os.environ['COMMIT_MSG'].split('\n')[0][:72]
+          embed = {
+            'title':   '✅  Deployment Successful',
+            'url':     os.environ['RUN_URL'],
+            'color':   3066993,
+            'fields': [
+              {'name': '\U0001f4dd  Commit',      'value': f'`{sha}` {msg}',         'inline': False},
+              {'name': '\U0001f465  Author',      'value': os.environ['ACTOR'],      'inline': True},
+              {'name': '\U0001f33f  Branch',      'value': os.environ['BRANCH'],     'inline': True},
+              {'name': '\U0001f517  View commit', 'value': os.environ['COMMIT_URL'], 'inline': False},
+            ],
+            'footer': {'text': 'JPverse CI/CD'},
+          }
+          ts = os.environ.get('TIMESTAMP', '')
+          if ts:
+            embed['timestamp'] = ts
+          print(json.dumps({'embeds': [embed]}))
+          PYEOF
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d @/tmp/payload.json
 
   notify-failure:
     name: "Notify Discord - Failure"
@@ -51,7 +81,35 @@ jobs:
     if: failure()
     steps:
       - name: Send failure notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          COMMIT_SHA:      ${{ github.sha }}
+          COMMIT_MSG:      ${{ github.event.head_commit.message || 'Manual trigger' }}
+          COMMIT_URL:      ${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+          RUN_URL:         ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          ACTOR:           ${{ github.actor }}
+          BRANCH:          ${{ github.ref_name }}
         run: |
-          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
-          -H "Content-Type: application/json" \
-          -d "{\"content\": \"🚨 Deployment Failed\"}"
+          python3 << 'PYEOF' > /tmp/payload.json
+          import json, os
+          sha = os.environ['COMMIT_SHA'][:7]
+          msg = os.environ['COMMIT_MSG'].split('\n')[0][:72]
+          embed = {
+            'title':       '\U0001f6a8  Deployment Failed',
+            'url':         os.environ['RUN_URL'],
+            'color':       15158332,
+            'description': 'A step in the deploy pipeline failed. Check the logs below.',
+            'fields': [
+              {'name': '\U0001f4dd  Commit',    'value': f'`{sha}` {msg}',        'inline': False},
+              {'name': '\U0001f465  Author',    'value': os.environ['ACTOR'],     'inline': True},
+              {'name': '\U0001f33f  Branch',    'value': os.environ['BRANCH'],    'inline': True},
+              {'name': '\U0001f50d  View logs', 'value': os.environ['RUN_URL'],   'inline': False},
+              {'name': '\U0001f517  Commit',    'value': os.environ['COMMIT_URL'],'inline': False},
+            ],
+            'footer': {'text': 'JPverse CI/CD'},
+          }
+          print(json.dumps({'embeds': [embed]}))
+          PYEOF
+          curl -s -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d @/tmp/payload.json
